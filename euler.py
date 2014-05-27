@@ -21,3 +21,58 @@ answer = sum(filter(lambda x: x % 2 == 0, fib))
 print(answer)
 
 
+#Euler3
+# The prime factors of 13195 are 5, 7, 13 and 29.
+# What is the largest prime factor of the number 600851475143 ?
+n = 600851475143 
+
+def primes(n):
+    primfac = []
+    d = 2
+    while d*d <= n:
+        while (n % d) == 0:
+            primfac.append(d)  
+            n = n / d
+        d = d + 1
+    if n > 1:
+       primfac.append(n)
+    return primfac
+
+print max(primes(n))
+
+
+# Euler4
+# A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+# Find the largest palindrome made from the product of two 3-digit numbers.
+n = 999 * 999 # The largest theoretical possibility 
+
+def palindrome(n):
+    palindromes = []
+    while n >= 0:
+        AsList = [int(i) for i in str(n)]
+        FirstHalf = AsList[:len(AsList)/2]
+        SecondHalf = AsList[len(AsList)/2:]
+        Rejoined = int(''.join(map(str,AsList)))
+        if FirstHalf == SecondHalf[::-1]:
+            palindromes.append(Rejoined)
+        n -= 1
+    return palindromes
+
+
+def three_dig_test(n):
+    LargestFactor = 999
+    SecondFactor = n / LargestFactor
+    while n % LargestFactor != 0:
+        LargestFactor -= 1
+        SecondFactor = n / LargestFactor
+    if len(str(LargestFactor)) == 3 and len(str(SecondFactor)) == 3:
+        return True 
+    else:
+        return False
+
+# Not exaclty optimized for speed, but...
+final = []
+for i in palindrome(n):
+    if three_dig_test(i) == True:
+        final.append(i)
+print max(final)
