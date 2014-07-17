@@ -76,3 +76,27 @@ for i in palindrome(n):
     if three_dig_test(i) == True:
         final.append(i)
 print max(final)
+
+
+# Euler5
+# 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+# What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+# Takes a minute, but...
+
+def allTest(x):
+    numbers = list(range(1,21))
+    Falses = 0
+    for n in numbers:
+        if x % n != 0:
+            Falses += 1
+    if Falses > 0:
+        return False
+    else:
+        return True
+
+def smallestMultiple(x):
+    while allTest(x) == False:
+        x+=10
+    return x
+
+print smallestMultiple(2520)
